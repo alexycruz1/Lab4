@@ -9,6 +9,9 @@ using std::endl;
 void crear_llenar(int***);
 void imprimir_cubo(int*** ,int);
 int tipo_ataque(int,int);
+void jugador_tablero1(int***, int);
+void jugador_tablero2(int***, int);
+
 int main(int argc, char*argv[]){
 	srand(time(NULL));
 	int size = 12;
@@ -17,11 +20,15 @@ int main(int argc, char*argv[]){
 	bool terminar_juego=false;
 	int bandera=1;
 	int*** matriz = new int**[size];
+	int*** matriz2 = new int**[size];
+
 	crear_llenar(matriz);
+	crear_llenar(matriz2);
 	
 	while(!terminar_juego){
 		if(bandera ==1){
-			
+			jugador_tablero1(matriz, size);
+			tipo_ataque(wave1,expansive1);
 			if(p2=0){
 				bandera=3;
 				terminar_juego=true;
@@ -30,7 +37,8 @@ int main(int argc, char*argv[]){
 			}	
 		}
 		if(bandera ==2){
-			
+			jugador_tablero2(matriz2, size);
+			tipo_ataque(wave2,expansive2); 		
 			if(p1=0){
                                 bandera=3;
                                 terminar_juego=true;
@@ -41,8 +49,36 @@ int main(int argc, char*argv[]){
 		}
 	}
 	
-	
 	return 0;
+}
+
+
+void jugador_tablero1(int*** cubo, int size){
+	cout << "------------------Mapa de submarinos de player 1-------------------" << endl;
+	for(int i =0; i< size; i++){
+                for(int j=0;j< size; j++){
+                        for(int k=0; k < size; k++){
+                                if (cubo[i][j][k] != 0){
+                                	cout << "{(" << i << ", " << j << ", " << k << ")}" << endl;
+                                }
+                        }
+                }
+        }
+        cout << endl;
+}
+
+void jugador_tablero2(int*** cubo, int size){
+	cout << "------------------Mapa de submarinos de player 2-------------------" << endl;
+	for(int i =0; i< size; i++){
+                for(int j=0;j< size; j++){
+                        for(int k=0; k < size; k++){
+                                if (cubo[i][j][k] != 0){
+                                	cout << "{(" << i << ", " << j << ", " << k << ")}" << endl;
+                                }
+                        }
+                }
+        }
+        cout << endl;
 }
 
 int tipo_ataque(int wave, int expansive){
@@ -51,15 +87,15 @@ int tipo_ataque(int wave, int expansive){
 	while(seguir){
 		cout<<"Seleccione el tipo de ataque: "<<endl
 		<<"1-Normal"<<endl
-		<<"2-Wave "<<"Quedan"<< wave<<" Por usar."<<endl
-		<<"3-Expansive "<< "Quedan "<< expansive << "Por usar"<<endl;
+		<<"2-Wave "<<"Quedan "<< wave<<" Por usar."<<endl
+		<<"3-Expansive "<< "Quedan "<< expansive << " Por usar"<<endl;
 		cin>> seleccion;
 	
 		if(seleccion == 2 && wave ==0){
-			cout<< "No quedan mas ataques del tipo wave."
+			cout<< "No quedan mas ataques del tipo wave.";
 		}else{
 			if(seleccion == 3 && expansive == 0){
-	
+				cout<< "No quedan mas ataques del tipo expansive.";
 			}else{
 				seguir=false;
 			}
@@ -68,6 +104,7 @@ int tipo_ataque(int wave, int expansive){
 	}
 	return seleccion;
 }
+
 void imprimir_cubo(int*** cubo, int size){
         for(int i =0; i<size; i++){
                 cout<<"piso: "<< i<<endl;
