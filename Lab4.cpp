@@ -6,6 +6,7 @@ using std::cin;
 using std::cout;
 using std::endl;
 
+int ataque_expansive(int*** matriz, int size);
 bool ataque_normal(int*** matriz, int size);
 void crear_llenar(int***);
 void imprimir_cubo(int*** ,int);
@@ -64,7 +65,8 @@ int main(int argc, char*argv[]){
                         }
 
 			if(seleccion == 5){
-			
+				int destruyo = ataque_expansive(matriz2, size);
+				p2 - destruyo;
 				expansive1--;
 			}
 
@@ -102,6 +104,13 @@ int main(int argc, char*argv[]){
 				p1 = p1-restar_barcos;
 				wave2--;
             		}			
+            }
+            if(seleccion == 2){
+            	wave2--;
+            }
+            if(seleccion == 3){
+             	wave2--;
+            }			
  			if(seleccion == 4){
 				int punto;
                                 cout<< "Ingrese el punto:";
@@ -113,6 +122,10 @@ int main(int argc, char*argv[]){
 			if(seleccion == 5){
                		expansive2--;
             		}
+               	int destruyo = ataque_expansive(matriz, size);
+               	p1 - destruyo;
+               	expansive2--;
+            }
 
 
 			if(p1=0){
@@ -124,6 +137,32 @@ int main(int argc, char*argv[]){
 	}
 
 	cout << "Ganaste!" << endl;
+
+	//inicio de borrado
+	for (int i = 0; i < size; i++){
+		for (int j = 0; j < size; j++){
+			delete [] matriz[i][j];
+		}
+	}
+
+	for (int i = 0; i < size; i++){
+		delete[] matriz[i];
+	}
+
+	delete[] matriz;
+
+	for (int i = 0; i < size; i++){
+		for (int j = 0; j < size; j++){
+			delete [] matriz2[i][j];
+		}
+	}
+
+	for (int i = 0; i < size; i++){
+		delete[] matriz2[i];
+	}
+
+	delete[] matriz2;
+	//fin de borrado
 
 	return 0;
 }
@@ -166,6 +205,55 @@ int wave(int*** matriz, int punto, int opcion ){
 	
 	return eliminados;
 }
+
+int ataque_expansive(int*** matriz, int size){
+	int x, y, z;
+	int destruyo = 0;
+
+	cout << "Ingrese el punto x: ";
+	cin >> x;
+	cout << endl;
+
+	while(x <= 0 || x >= 11){
+		cout << "Ingrese el punto x: ";
+		cin >> x;
+		cout << endl;
+	}
+
+	cout << "Ingrese el punto y: ";
+	cin >> y;
+	cout << endl;
+
+	while(y <= 0 || y >= 11){
+		cout << "Ingrese el punto y: ";
+		cin >> y;
+		cout << endl;
+	}
+
+	cout << "Ingrese el punto z: ";
+	cin >> z;
+	cout << endl;
+
+	while(z <= 0 || z >= 11){
+		cout << "Ingrese el punto z: ";
+		cin >> z;
+		cout << endl;
+	}
+
+	for (int i = x - 1; i < x + 2; ++i){
+		for (int j = y - 1; j < y + 2; ++j){
+			for (int k = z - 1; k < z + 2; ++k){
+				if (matriz[i][j][k] == 1){
+					matriz[i][j][k] = 0;
+					cout << "Se elimino el submarino en el punto: " << "(" << i << ", " << j << ", " << k << ")" << endl;
+					destruyo++;
+				}
+			}
+		}
+	}
+
+}
+
 bool ataque_normal(int*** matriz, int size){
 	int x, y, z;
 	bool destruyo = false;
