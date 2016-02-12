@@ -9,8 +9,8 @@ using std::endl;
 void crear_llenar(int***);
 void imprimir_cubo(int*** ,int);
 int tipo_ataque(int,int);
-void jugador_tablero1(int***, int, &int);
-void jugador_tablero2(int***, int, &int);
+void jugador_tablero1(int***, int);
+void jugador_tablero2(int***, int);
 
 int main(int argc, char*argv[]){
 	srand(time(NULL));
@@ -62,7 +62,6 @@ void jugador_tablero1(int*** cubo, int size){
                         for(int k=0; k < size; k++){
                                 if (cubo[i][j][k] != 0){
                                 	cout << "{(" << i << ", " << j << ", " << k << ")}" << endl;
-                                	contador_subs1++;
                                 }
                         }
                 }
@@ -77,7 +76,6 @@ void jugador_tablero2(int*** cubo, int size){
                         for(int k=0; k < size; k++){
                                 if (cubo[i][j][k] != 0){
                                 	cout << "{(" << i << ", " << j << ", " << k << ")}" << endl;
-                                	contador_subs2++;
                                 }
                         }
                 }
