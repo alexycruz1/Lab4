@@ -6,21 +6,19 @@ using std::cin;
 using std::cout;
 using std::endl;
 
-void ataque_normal(int*** matriz, int size);
+bool ataque_normal(int*** matriz, int size);
 void crear_llenar(int***);
 void imprimir_cubo(int*** ,int);
 int tipo_ataque(int,int);
 void jugador_tablero1(int***, int);
 void jugador_tablero2(int***, int);
-
+int wave(int***,int,int);
 
 int main(int argc, char*argv[]){
 	srand(time(NULL));
 	int size = 12;
 	int p1=15,p2=15;
 	int wave1=3,wave2=3, expansive1=3,expansive2=3;
-	int contador_subs1 = 0;
-	int contador_subs2 = 0;
 	bool terminar_juego=false;
 	int bandera=1;
 	int*** matriz = new int**[size];
@@ -35,18 +33,33 @@ int main(int argc, char*argv[]){
 			int seleccion = tipo_ataque(wave1,expansive1);
 			if(seleccion ==1){
 				ataque_normal(matriz2, size);
-				
+				bool destruyo = ataque_normal(matriz2, size);
+				if (destruyo){
+					p2--;
+				}
 			}
 			if(seleccion == 2){
-			
+				int punto;
+				cout<< "Ingrese el punto:";
+				cin>>punto;
+				int restar_barcos = wave(matriz2,punto,seleccion);
+				p2 = p2-restar_barcos;			
 				wave1--;	
 			}
 			if(seleccion == 3){
-
+				int punto;
+                                cout<< "Ingrese el punto:";
+                                cin>>punto;
+                                int restar_barcos = wave(matriz2,punto,seleccion);
+				p2 = p2-restar_barcos;
                                 wave1--;
                         }
 			if(seleccion == 4){
-
+				int punto;
+                                cout<< "Ingrese el punto:";
+                                cin>>punto;
+                                int restar_barcos = wave(matriz2,punto,seleccion);
+				p2 = p2-restar_barcos;
                                 wave1--;
                         }
 
@@ -64,30 +77,49 @@ int main(int argc, char*argv[]){
 			}	
 		}
 		if(bandera ==2){
-			jugador_tablero2(matriz, size);
+			jugador_tablero2(matriz2, size);
 			int seleccion= tipo_ataque(wave2,expansive2);
 			if(seleccion ==1){
-				ataque_normal(matriz, size);
-            }
-            if(seleccion == 2){
-            	wave2--;
-            }
-            if(seleccion == 3){
-             	wave2--;
-            }			
+				bool destruyo = ataque_normal(matriz, size);
+				if (destruyo){
+					p1--;
+				}
+				cout << p1;
+            		}
+            		if(seleccion == 2){
+            			int punto;
+                                cout<< "Ingrese el punto:";
+                                cin>>punto;
+                                int restar_barcos = wave(matriz,punto,seleccion);
+				p1 = p1-restar_barcos;
+				wave2--;
+            		}
+            		if(seleccion == 3){
+             			int punto;
+                                cout<< "Ingrese el punto:";
+                                cin>>punto;
+                                int restar_barcos = wave(matriz,punto,seleccion);
+				p1 = p1-restar_barcos;
+				wave2--;
+            		}			
  			if(seleccion == 4){
-	            wave2--;
-            }
+				int punto;
+                                cout<< "Ingrese el punto:";
+                                cin>>punto;
+                                int restar_barcos = wave(matriz,punto,seleccion);
+				p1 = p1-restar_barcos;
+	           	 	wave2--;
+            		}
 			if(seleccion == 5){
-               	expansive2--;
-            }
+               		expansive2--;
+            		}
 
 
 			if(p1=0){
-                terminar_juego=true;
-            }else{
-                bandera=1;
-            }
+                		terminar_juego=true;
+            		}else{
+                		bandera=1;
+            		}
 		}
 	}
 
@@ -96,8 +128,47 @@ int main(int argc, char*argv[]){
 	return 0;
 }
 
-void ataque_normal(int*** matriz, int size){
+int wave(int*** matriz, int punto, int opcion ){
+	int eliminados=0;
+	if(opcion == 2){
+		for(int i=0; i<12;i++){
+			for(int j=0; j<12;j++){
+				if(matriz[punto][i][j]==1){
+					matriz[punto][i][j]=0;
+					cout<<"Barco destruido en: "<<punto<< " "<< i << " "<< j<< " " <<endl;
+					eliminados++;		
+				}				
+			}
+		}	
+	}
+	if(opcion == 3){
+		for(int i=0; i<12;i++){
+                        for(int j=0; j<12;j++){
+                                if(matriz[i][punto][j]==1){
+                                        matriz[i][punto][j]=0;
+                                        cout<<"Barco destruido en: "<<punto<< " "<< i << " "<< j<< " " <<endl;
+                                        eliminados++;
+                                } 
+                        }
+                } 
+	}
+	if(opcion == 4){
+		for(int i=0; i<12;i++){
+                        for(int j=0; j<12;j++){
+                                if(matriz[i][j][punto]==1){
+                                        matriz[i][j][punto]=0;
+                                        cout<<"Barco destruido en: "<<punto<< " "<< i << " "<< j<< " " <<endl;
+                                        eliminados++;
+                                } 
+                        }
+                } 
+	}
+	
+	return eliminados;
+}
+bool ataque_normal(int*** matriz, int size){
 	int x, y, z;
+	bool destruyo = false;
 	cout << "Ingrese el punto x: ";
 	cin >> x;
 	cout << endl;
@@ -131,8 +202,10 @@ void ataque_normal(int*** matriz, int size){
 	if (matriz[x][y][z] == 1){
 		matriz[x][y][z] = 0;
 		cout << "Barco destruido en: " << "(" << x << ", " << y << ", " << z << ")" << endl << endl;
+		destruyo = true;
 	}
 
+	return destruyo;
 }
 
 void jugador_tablero1(int*** cubo, int size){
