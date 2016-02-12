@@ -9,13 +9,15 @@ using std::endl;
 void crear_llenar(int***);
 void imprimir_cubo(int*** ,int);
 int tipo_ataque(int,int);
-void jugador_tablero1(int***, int);
-void jugador_tablero2(int***, int);
+void jugador_tablero1(int***, int, &int);
+void jugador_tablero2(int***, int, &int);
 
 int main(int argc, char*argv[]){
 	srand(time(NULL));
 	int size = 12;
 	int wave1=3,wave2=3, expansive1=3,expansive2=3;
+	int contador_subs1 = 0;
+	int contador_subs2 = 0;
 
 	int*** matriz = new int**[size];
 	int*** matriz2 = new int**[size];
@@ -26,8 +28,8 @@ int main(int argc, char*argv[]){
 	crear_llenar(matriz2);
 	//imprimir_cubo(matriz2, size);
 
-	jugador_tablero1(matriz, size);
-	jugador_tablero2(matriz2, size);
+	jugador_tablero1(matriz, size, &contador_subs1);
+	jugador_tablero2(matriz2, size, &contador_subs2);
 	
 	return 0;
 }
@@ -39,6 +41,7 @@ void jugador_tablero1(int*** cubo, int size){
                         for(int k=0; k < size; k++){
                                 if (cubo[i][j][k] != 0){
                                 	cout << "{(" << i << ", " << j << ", " << k << ")}" << endl;
+                                	contador_subs1++;
                                 }
                         }
                 }
@@ -53,6 +56,7 @@ void jugador_tablero2(int*** cubo, int size){
                         for(int k=0; k < size; k++){
                                 if (cubo[i][j][k] != 0){
                                 	cout << "{(" << i << ", " << j << ", " << k << ")}" << endl;
+                                	contador_subs2++;
                                 }
                         }
                 }
