@@ -13,6 +13,7 @@ int tipo_ataque(int,int);
 void jugador_tablero1(int***, int);
 void jugador_tablero2(int***, int);
 
+
 int main(int argc, char*argv[]){
 	srand(time(NULL));
 	int size = 12;
@@ -22,7 +23,6 @@ int main(int argc, char*argv[]){
 	int contador_subs2 = 0;
 	bool terminar_juego=false;
 	int bandera=1;
-
 	int*** matriz = new int**[size];
 	int*** matriz2 = new int**[size];
 
@@ -32,9 +32,31 @@ int main(int argc, char*argv[]){
 	while(!terminar_juego){
 		if(bandera ==1){
 			jugador_tablero1(matriz, size);
-			tipo_ataque(wave1,expansive1);
+			int seleccion = tipo_ataque(wave1,expansive1);
+			if(seleccion ==1){
+			
+			}
+			if(seleccion == 2){
+			
+				wave1--;	
+			}
+			if(seleccion == 3){
+
+                                wave1--;
+                        }
+			if(seleccion == 4){
+
+                                wave1--;
+                        }
+
+			if(seleccion == 5){
+			
+				expansive1--;
+			}
+
+
+
 			if(p2=0){
-				bandera=3;
 				terminar_juego=true;
 			}else{
 				bandera=2;
@@ -42,16 +64,37 @@ int main(int argc, char*argv[]){
 		}
 		if(bandera ==2){
 			jugador_tablero2(matriz2, size);
-			tipo_ataque(wave2,expansive2); 		
+			int seleccion= tipo_ataque(wave2,expansive2);
+			if(seleccion ==1){
+
+                        }
+                        if(seleccion == 2){
+
+                                wave2--;
+                        }
+                        if(seleccion == 3){
+
+                                wave2--;
+                        }			
+ 			if(seleccion == 4){
+
+                                wave2--;
+                        }
+			if(seleccion == 5){
+
+                                expansive2--;
+                        }
+
+
 			if(p1=0){
-                bandera=3;
-                terminar_juego=true;
-            }else{
-               	bandera=1;
-            }
+                                terminar_juego=true;
+                        }else{
+                                bandera=1;
+                        }
+
 		}
 	}
-	
+
 	return 0;
 }
 
@@ -128,15 +171,19 @@ int tipo_ataque(int wave, int expansive){
 	while(seguir){
 		cout<<"Seleccione el tipo de ataque: "<<endl
 		<<"1-Normal"<<endl
-		<<"2-Wave "<<"Quedan "<< wave<<" Por usar."<<endl
-		<<"3-Expansive "<< "Quedan "<< expansive << " Por usar"<<endl;
+		<<"2-Wave en XY "<<endl
+		<<"3-Wave en XZ "<<endl
+		<<"4-Wave en YZ"<<endl
+		<<"5-Expansive "<< endl
+		<<"Quedan "<<wave<< " Waves"<<endl
+		<<"Quedan " << expansive<<" Expansive"<<endl;
 		cin>> seleccion;
 	
-		if(seleccion == 2 && wave ==0){
-			cout<< "No quedan mas ataques del tipo wave.";
+		if(seleccion == 2 && wave ==0 || seleccion ==3 && wave==0 || seleccion ==4 && wave==0){
+			cout<< "No quedan mas ataques del tipo wave."<<endl;
 		}else{
-			if(seleccion == 3 && expansive == 0){
-				cout<< "No quedan mas ataques del tipo expansive.";
+			if(seleccion == 5 && expansive == 0){
+				cout<< "No quedan mas ataques del tipo expansive."<<endl;
 			}else{
 				seguir=false;
 			}
