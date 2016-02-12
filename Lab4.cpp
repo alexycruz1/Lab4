@@ -6,6 +6,7 @@ using std::cin;
 using std::cout;
 using std::endl;
 
+void ataque_normal(int*** matriz, int size);
 void crear_llenar(int***);
 void imprimir_cubo(int*** ,int);
 int tipo_ataque(int,int);
@@ -54,6 +55,44 @@ int main(int argc, char*argv[]){
 	return 0;
 }
 
+void ataque_normal(int*** matriz, int size){
+	int x, y, z;
+	cout << "Ingrese el punto x: ";
+	cin >> x;
+	cout << endl;
+
+	while(x < 0 || x > 11){
+		cout << "Ingrese el punto x: ";
+		cin >> x;
+		cout << endl;
+	}
+
+	cout << "Ingrese el punto y: ";
+	cin >> y;
+	cout << endl;
+
+	while(y < 0 || y > 11){
+		cout << "Ingrese el punto y: ";
+		cin >> y;
+		cout << endl;
+	}
+
+	cout << "Ingrese el punto z: ";
+	cin >> z;
+	cout << endl;
+
+	while(z < 0 || z > 11){
+		cout << "Ingrese el punto z: ";
+		cin >> z;
+		cout << endl;
+	}
+
+	if (matriz[x][y][z] == 1){
+		matriz[x][y][z] = 0;
+		cout << "Barco destruido en: " << "(" << x << ", " << y << ", " << z << ")" << endl;
+	}
+
+}
 
 void jugador_tablero1(int*** cubo, int size){
 	cout << "------------------Mapa de submarinos de player 1-------------------" << endl;
