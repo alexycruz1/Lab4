@@ -13,7 +13,7 @@ void imprimir_cubo(int*** ,int);
 int tipo_ataque(int,int);
 void jugador_tablero1(int***, int);
 void jugador_tablero2(int***, int);
-int wave(int***,int,int);
+
 
 int main(int argc, char*argv[]){
 	srand(time(NULL));
@@ -33,36 +33,23 @@ int main(int argc, char*argv[]){
 			jugador_tablero1(matriz, size);
 			int seleccion = tipo_ataque(wave1,expansive1);
 			if(seleccion ==1){
-				ataque_normal(matriz2, size);
 				bool destruyo = ataque_normal(matriz2, size);
 				if (destruyo){
 					p2--;
 				}
 			}
 			if(seleccion == 2){
-				int punto;
-				cout<< "Ingrese el punto:";
-				cin>>punto;
-				int restar_barcos = wave(matriz2,punto,seleccion);
-				p2 = p2-restar_barcos;			
+			
 				wave1--;	
 			}
 			if(seleccion == 3){
-				int punto;
-                                cout<< "Ingrese el punto:";
-                                cin>>punto;
-                                int restar_barcos = wave(matriz2,punto,seleccion);
-				p2 = p2-restar_barcos;
+
                                 wave1--;
                         }
 			if(seleccion == 4){
-				int punto;
-                cout<< "Ingrese el punto:";
-                cin>>punto;
-                int restar_barcos = wave(matriz2,punto,seleccion);
-				p2 = p2-restar_barcos;
-                wave1--;
-            }
+
+                                wave1--;
+                        }
 
 			if(seleccion == 5){
 				int destruyo = ataque_expansive(matriz2, size);
@@ -70,13 +57,14 @@ int main(int argc, char*argv[]){
 				expansive1--;
 			}
 
+
+
 			if(p2=0){
 				terminar_juego=true;
 			}else{
 				bandera=2;
-			}
+			}	
 		}
-
 		if(bandera ==2){
 			jugador_tablero2(matriz2, size);
 			int seleccion= tipo_ataque(wave2,expansive2);
@@ -85,24 +73,6 @@ int main(int argc, char*argv[]){
 				if (destruyo){
 					p1--;
 				}
-				cout << p1;
-            		}
-            		if(seleccion == 2){
-            			int punto;
-                        cout<< "Ingrese el punto:";
-                        cin>>punto;
-                        int restar_barcos = wave(matriz,punto,seleccion);
-						p1 = p1-restar_barcos;
-						wave2--;
-            		}
-            		if(seleccion == 3){
-             			int punto;
-                        cout<< "Ingrese el punto:";
-                        cin>>punto;
-                        int restar_barcos = wave(matriz,punto,seleccion);
-						p1 = p1-restar_barcos;
-						wave2--;
-            		}			
             }
             if(seleccion == 2){
             	wave2--;
@@ -111,26 +81,19 @@ int main(int argc, char*argv[]){
              	wave2--;
             }			
  			if(seleccion == 4){
-				int punto;
-                cout<< "Ingrese el punto:";
-                cin>>punto;
-                int restar_barcos = wave(matriz,punto,seleccion);
-				p1 = p1-restar_barcos;
-	           	wave2--;
-            		}
-			if(seleccion == 5){
-               	expansive2--;
+	            wave2--;
             }
-            int destruyo = ataque_expansive(matriz, size);
-            p1 - destruyo;
-            expansive2--;
+			if(seleccion == 5){
+               	int destruyo = ataque_expansive(matriz, size);
+               	p1 - destruyo;
+               	expansive2--;
             }
 
 
 			if(p1=0){
-               	terminar_juego=true;
+                terminar_juego=true;
             }else{
-               	bandera=1;
+                bandera=1;
             }
 		}
 	}
@@ -164,46 +127,6 @@ int main(int argc, char*argv[]){
 	//fin de borrado
 
 	return 0;
-}
-
-int wave(int*** matriz, int punto, int opcion ){
-	int eliminados=0;
-	if(opcion == 2){
-		for(int i=0; i<12;i++){
-			for(int j=0; j<12;j++){
-				if(matriz[punto][i][j]==1){
-					matriz[punto][i][j]=0;
-					cout<<"Barco destruido en: "<<punto<< " "<< i << " "<< j<< " " <<endl;
-					eliminados++;		
-				}				
-			}
-		}	
-	}
-	if(opcion == 3){
-		for(int i=0; i<12;i++){
-            for(int j=0; j<12;j++){
-                if(matriz[i][punto][j]==1){
-                    matriz[i][punto][j]=0;
-                    cout<<"Barco destruido en: "<<punto<< " "<< i << " "<< j<< " " <<endl;
-                    eliminados++;
-                } 
-            }
-        } 
-	}
-
-	if(opcion == 4){
-		for(int i=0; i<12;i++){
-            for(int j=0; j<12;j++){
-                if(matriz[i][j][punto]==1){
-                    matriz[i][j][punto]=0;
-                    cout<<"Barco destruido en: "<<punto<< " "<< i << " "<< j<< " " <<endl;
-                    eliminados++;
-                } 
-            }
-        } 
-	}
-	
-	return eliminados;
 }
 
 int ataque_expansive(int*** matriz, int size){
