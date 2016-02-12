@@ -17,14 +17,10 @@ int main(int argc, char*argv[]){
 	int size = 12;
 	int p1=15,p2=15;
 	int wave1=3,wave2=3, expansive1=3,expansive2=3;
-<<<<<<< HEAD
 	int contador_subs1 = 0;
 	int contador_subs2 = 0;
-
-=======
 	bool terminar_juego=false;
 	int bandera=1;
->>>>>>> 9a67471b5d0f2670345f290536bd997372591a09
 	int*** matriz = new int**[size];
 	int*** matriz2 = new int**[size];
 
@@ -52,14 +48,9 @@ int main(int argc, char*argv[]){
                                 bandera=1;
                         }
 
-<<<<<<< HEAD
-	jugador_tablero1(matriz, size, &contador_subs1);
-	jugador_tablero2(matriz2, size, &contador_subs2);
-=======
 		}
 	}
->>>>>>> 9a67471b5d0f2670345f290536bd997372591a09
-	
+
 	return 0;
 }
 
