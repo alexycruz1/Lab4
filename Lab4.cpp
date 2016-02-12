@@ -35,6 +35,7 @@ int main(int argc, char*argv[]){
 			int seleccion = tipo_ataque(wave1,expansive1);
 			if(seleccion ==1){
 			
+				ataque_normal(matriz2, size);
 			}
 			if(seleccion == 2){
 			
@@ -63,37 +64,34 @@ int main(int argc, char*argv[]){
 			}	
 		}
 		if(bandera ==2){
-			jugador_tablero2(matriz2, size);
+			jugador_tablero2(matriz, size);
 			int seleccion= tipo_ataque(wave2,expansive2);
 			if(seleccion ==1){
-
-                        }
-                        if(seleccion == 2){
-
-                                wave2--;
-                        }
-                        if(seleccion == 3){
-
-                                wave2--;
-                        }			
+				ataque_normal(matriz, size);
+            }
+            if(seleccion == 2){
+            	wave2--;
+            }
+            if(seleccion == 3){
+             	wave2--;
+            }			
  			if(seleccion == 4){
-
-                                wave2--;
-                        }
+	            wave2--;
+            }
 			if(seleccion == 5){
-
-                                expansive2--;
-                        }
+               	expansive2--;
+            }
 
 
 			if(p1=0){
-                                terminar_juego=true;
-                        }else{
-                                bandera=1;
-                        }
-
+                terminar_juego=true;
+            }else{
+                bandera=1;
+            }
 		}
 	}
+
+	cout << "Ganaste!" << endl;
 
 	return 0;
 }
@@ -132,7 +130,7 @@ void ataque_normal(int*** matriz, int size){
 
 	if (matriz[x][y][z] == 1){
 		matriz[x][y][z] = 0;
-		cout << "Barco destruido en: " << "(" << x << ", " << y << ", " << z << ")" << endl;
+		cout << "Barco destruido en: " << "(" << x << ", " << y << ", " << z << ")" << endl << endl;
 	}
 
 }
@@ -140,28 +138,28 @@ void ataque_normal(int*** matriz, int size){
 void jugador_tablero1(int*** cubo, int size){
 	cout << "------------------Mapa de submarinos de player 1-------------------" << endl;
 	for(int i =0; i< size; i++){
-                for(int j=0;j< size; j++){
-                        for(int k=0; k < size; k++){
-                                if (cubo[i][j][k] != 0){
-                                	cout << "{(" << i << ", " << j << ", " << k << ")}" << endl;
-                                }
-                        }
+        for(int j=0;j< size; j++){
+            for(int k=0; k < size; k++){
+                if (cubo[i][j][k] != 0){
+                    cout << "{(" << i << ", " << j << ", " << k << ")}" << endl;
                 }
+            }
         }
+    }
         cout << endl;
 }
 
 void jugador_tablero2(int*** cubo, int size){
 	cout << "------------------Mapa de submarinos de player 2-------------------" << endl;
 	for(int i =0; i< size; i++){
-                for(int j=0;j< size; j++){
-                        for(int k=0; k < size; k++){
-                                if (cubo[i][j][k] != 0){
-                                	cout << "{(" << i << ", " << j << ", " << k << ")}" << endl;
-                                }
-                        }
+        for(int j=0;j< size; j++){
+        	for(int k=0; k < size; k++){
+                if (cubo[i][j][k] != 0){
+                    cout << "{(" << i << ", " << j << ", " << k << ")}" << endl;
                 }
+            }
         }
+    }
         cout << endl;
 }
 
@@ -174,10 +172,11 @@ int tipo_ataque(int wave, int expansive){
 		<<"2-Wave en XY "<<endl
 		<<"3-Wave en XZ "<<endl
 		<<"4-Wave en YZ"<<endl
-		<<"5-Expansive "<< endl
+		<<"5-Expansive "<< endl << endl
 		<<"Quedan "<<wave<< " Waves"<<endl
 		<<"Quedan " << expansive<<" Expansive"<<endl;
-		cin>> seleccion;
+		cin >> seleccion;
+		cout << endl;
 	
 		if(seleccion == 2 && wave ==0 || seleccion ==3 && wave==0 || seleccion ==4 && wave==0){
 			cout<< "No quedan mas ataques del tipo wave."<<endl;
