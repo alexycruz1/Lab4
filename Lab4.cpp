@@ -12,16 +12,40 @@ int tipo_ataque(int,int);
 int main(int argc, char*argv[]){
 	srand(time(NULL));
 	int size = 12;
+	int p1=15,p2=15;
 	int wave1=3,wave2=3, expansive1=3,expansive2=3;
-
+	bool terminar_juego=false;
+	int bandera=1;
 	int*** matriz = new int**[size];
 	crear_llenar(matriz);
+	
+	while(!terminar_juego){
+		if(bandera ==1){
+			
+			if(p2=0){
+				bandera=3;
+				terminar_juego=true;
+			}else{
+				bandera=2;
+			}	
+		}
+		if(bandera ==2){
+			
+			if(p1=0){
+                                bandera=3;
+                                terminar_juego=true;
+                        }else{
+                                bandera=1;
+                        }
+
+		}
+	}
 	
 	
 	return 0;
 }
 
-void tipo_ataque(int wave, int expansive){
+int tipo_ataque(int wave, int expansive){
 	int seleccion;
 	bool seguir=true;
 	while(seguir){
