@@ -6,7 +6,7 @@ using std::cin;
 using std::cout;
 using std::endl;
 
-void ataque_normal(int*** matriz, int size);
+bool ataque_normal(int*** matriz, int size);
 void crear_llenar(int***);
 void imprimir_cubo(int*** ,int);
 int tipo_ataque(int,int);
@@ -19,8 +19,6 @@ int main(int argc, char*argv[]){
 	int size = 12;
 	int p1=15,p2=15;
 	int wave1=3,wave2=3, expansive1=3,expansive2=3;
-	int contador_subs1 = 0;
-	int contador_subs2 = 0;
 	bool terminar_juego=false;
 	int bandera=1;
 	int*** matriz = new int**[size];
@@ -35,7 +33,11 @@ int main(int argc, char*argv[]){
 			int seleccion = tipo_ataque(wave1,expansive1);
 			if(seleccion ==1){
 			
-				ataque_normal(matriz2, size);
+				bool destruyo = ataque_normal(matriz2, size);
+				if (destruyo){
+					p2--;
+				}
+				cout << p2;
 			}
 			if(seleccion == 2){
 			
@@ -64,10 +66,14 @@ int main(int argc, char*argv[]){
 			}	
 		}
 		if(bandera ==2){
-			jugador_tablero2(matriz, size);
+			jugador_tablero2(matriz2, size);
 			int seleccion= tipo_ataque(wave2,expansive2);
 			if(seleccion ==1){
-				ataque_normal(matriz, size);
+				bool destruyo = ataque_normal(matriz, size);
+				if (destruyo){
+					p1--;
+				}
+				cout << p1;
             }
             if(seleccion == 2){
             	wave2--;
@@ -96,8 +102,9 @@ int main(int argc, char*argv[]){
 	return 0;
 }
 
-void ataque_normal(int*** matriz, int size){
+bool ataque_normal(int*** matriz, int size){
 	int x, y, z;
+	bool destruyo = false;
 	cout << "Ingrese el punto x: ";
 	cin >> x;
 	cout << endl;
@@ -131,8 +138,10 @@ void ataque_normal(int*** matriz, int size){
 	if (matriz[x][y][z] == 1){
 		matriz[x][y][z] = 0;
 		cout << "Barco destruido en: " << "(" << x << ", " << y << ", " << z << ")" << endl << endl;
+		destruyo = true;
 	}
 
+	return destruyo;
 }
 
 void jugador_tablero1(int*** cubo, int size){
