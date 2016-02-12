@@ -33,7 +33,7 @@ int main(int argc, char*argv[]){
 			jugador_tablero1(matriz, size);
 			int seleccion = tipo_ataque(wave1,expansive1);
 			if(seleccion ==1){
-			
+							
 			}
 			if(seleccion == 2){
 			
