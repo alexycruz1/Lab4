@@ -6,12 +6,16 @@ using std::cin;
 using std::cout;
 using std::endl;
 
-void crear_llenar();
+void crear_llenar(int***);
 void imprimir_cubo(int*** ,int);
 
 int main(int argc, char*argv[]){
 	srand(time(NULL));
+	int size = 12;
 	
+	int*** matriz = new int**[size];
+	crear_llenar(matriz);
+	imprimir_cubo(matriz,size);
 	return 0;
 }
 
@@ -19,7 +23,7 @@ void imprimir_cubo(int*** cubo, int size){
         for(int i =0; i<size; i++){
                 cout<<"piso: "<< i<<endl;
                 for(int j=0;j<size; j++){
-                        for(int k=0; i<size; k++){
+                        for(int k=0; k<size; k++){
                                 cout << cubo[i][j][k];
                         }
                         cout<<endl;
@@ -27,14 +31,12 @@ void imprimir_cubo(int*** cubo, int size){
         }
 }
 
-void crear_llenar(){
+void crear_llenar(int*** matriz){
 	int size = 12;
 	int cont_barcos = 0;
 	int azar1 = (rand()% 12 + 0); 
 	int azar2 = (rand()% 12 + 0);
 	int azar3 = (rand()% 12 + 0);
-
-	int*** matriz = new int**[size];
 
 	for (int i = 0; i < size; i++){
 		matriz[i] = new int*[size];
@@ -57,18 +59,11 @@ void crear_llenar(){
 	}
 
 	//llenado de barcos
-	for (int i = 0; i < size; i++){
-		for (int j = 0; j < size; j++){
-			for (int k = 0; k < size; k++){
-				if (matriz[azar1][azar2][azar3] == 0 && cont_barcos < 15){
-					azar1 = (rand()% 12 + 0); 
-					azar2 = (rand()% 12 + 0);
-					azar3 = (rand()% 12 + 0);
-
-					matriz[azar1][azar2][azar3] = 1;
-					cont_barcos++;
-				}		
-			}
+	for (int i = 0; i <15 ; i++){
+		if(matriz[rand()%12][rand()%12][rand()%12]==0){
+			matriz[rand()%12][rand()%12][rand()%12]=1;
+		}else{
+			i--;
 		}
 	}
 }
