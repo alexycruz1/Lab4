@@ -6,22 +6,26 @@ using std::cin;
 using std::cout;
 using std::endl;
 
-void crear_llenar();
+void crear_llenar(int***);
 
 int main(int argc, char*argv[]){
 	srand(time(NULL));
+	int size = 12;
+	
+	int*** matriz;
+	crear_llenar(matriz);
 
 	return 0;
 }
 
-void crear_llenar(){
+void crear_llenar(int*** matriz){
 	int size = 12;
 	int cont_barcos = 0;
 	int azar1 = (rand()% 12 + 0); 
 	int azar2 = (rand()% 12 + 0);
 	int azar3 = (rand()% 12 + 0);
 
-	int*** matriz = new int**[size];
+	matriz = new int**[size];
 
 	for (int i = 0; i < size; i++){
 		matriz[i] = new int*[size];
