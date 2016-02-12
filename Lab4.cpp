@@ -9,8 +9,8 @@ using std::endl;
 void crear_llenar(int***);
 void imprimir_cubo(int*** ,int);
 int tipo_ataque(int,int);
-void jugador_tablero1(int***, int, &int);
-void jugador_tablero2(int***, int, &int);
+void jugador_tablero1(int***, int, int);
+void jugador_tablero2(int***, int, int);
 
 int main(int argc, char*argv[]){
 	srand(time(NULL));
