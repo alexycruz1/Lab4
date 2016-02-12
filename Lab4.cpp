@@ -6,6 +6,7 @@ using std::cin;
 using std::cout;
 using std::endl;
 
+void ataque_normal(int*** matriz, int size);
 void crear_llenar(int***);
 void imprimir_cubo(int*** ,int);
 int tipo_ataque(int,int);
@@ -33,7 +34,8 @@ int main(int argc, char*argv[]){
 			jugador_tablero1(matriz, size);
 			int seleccion = tipo_ataque(wave1,expansive1);
 			if(seleccion ==1){
-							
+				ataque_normal(matriz2, size);
+				
 			}
 			if(seleccion == 2){
 			
@@ -62,67 +64,102 @@ int main(int argc, char*argv[]){
 			}	
 		}
 		if(bandera ==2){
-			jugador_tablero2(matriz2, size);
+			jugador_tablero2(matriz, size);
 			int seleccion= tipo_ataque(wave2,expansive2);
 			if(seleccion ==1){
-
-                        }
-                        if(seleccion == 2){
-
-                                wave2--;
-                        }
-                        if(seleccion == 3){
-
-                                wave2--;
-                        }			
+				ataque_normal(matriz, size);
+            }
+            if(seleccion == 2){
+            	wave2--;
+            }
+            if(seleccion == 3){
+             	wave2--;
+            }			
  			if(seleccion == 4){
-
-                                wave2--;
-                        }
+	            wave2--;
+            }
 			if(seleccion == 5){
-
-                                expansive2--;
-                        }
+               	expansive2--;
+            }
 
 
 			if(p1=0){
-                                terminar_juego=true;
-                        }else{
-                                bandera=1;
-                        }
-
+                terminar_juego=true;
+            }else{
+                bandera=1;
+            }
 		}
 	}
+
+	cout << "Ganaste!" << endl;
 
 	return 0;
 }
 
+void ataque_normal(int*** matriz, int size){
+	int x, y, z;
+	cout << "Ingrese el punto x: ";
+	cin >> x;
+	cout << endl;
+
+	while(x < 0 || x > 11){
+		cout << "Ingrese el punto x: ";
+		cin >> x;
+		cout << endl;
+	}
+
+	cout << "Ingrese el punto y: ";
+	cin >> y;
+	cout << endl;
+
+	while(y < 0 || y > 11){
+		cout << "Ingrese el punto y: ";
+		cin >> y;
+		cout << endl;
+	}
+
+	cout << "Ingrese el punto z: ";
+	cin >> z;
+	cout << endl;
+
+	while(z < 0 || z > 11){
+		cout << "Ingrese el punto z: ";
+		cin >> z;
+		cout << endl;
+	}
+
+	if (matriz[x][y][z] == 1){
+		matriz[x][y][z] = 0;
+		cout << "Barco destruido en: " << "(" << x << ", " << y << ", " << z << ")" << endl << endl;
+	}
+
+}
 
 void jugador_tablero1(int*** cubo, int size){
 	cout << "------------------Mapa de submarinos de player 1-------------------" << endl;
 	for(int i =0; i< size; i++){
-                for(int j=0;j< size; j++){
-                        for(int k=0; k < size; k++){
-                                if (cubo[i][j][k] != 0){
-                                	cout << "{(" << i << ", " << j << ", " << k << ")}" << endl;
-                                }
-                        }
+        for(int j=0;j< size; j++){
+            for(int k=0; k < size; k++){
+                if (cubo[i][j][k] != 0){
+                    cout << "{(" << i << ", " << j << ", " << k << ")}" << endl;
                 }
+            }
         }
+    }
         cout << endl;
 }
 
 void jugador_tablero2(int*** cubo, int size){
 	cout << "------------------Mapa de submarinos de player 2-------------------" << endl;
 	for(int i =0; i< size; i++){
-                for(int j=0;j< size; j++){
-                        for(int k=0; k < size; k++){
-                                if (cubo[i][j][k] != 0){
-                                	cout << "{(" << i << ", " << j << ", " << k << ")}" << endl;
-                                }
-                        }
+        for(int j=0;j< size; j++){
+        	for(int k=0; k < size; k++){
+                if (cubo[i][j][k] != 0){
+                    cout << "{(" << i << ", " << j << ", " << k << ")}" << endl;
                 }
+            }
         }
+    }
         cout << endl;
 }
 
@@ -135,10 +172,11 @@ int tipo_ataque(int wave, int expansive){
 		<<"2-Wave en XY "<<endl
 		<<"3-Wave en XZ "<<endl
 		<<"4-Wave en YZ"<<endl
-		<<"5-Expansive "<< endl
+		<<"5-Expansive "<< endl << endl
 		<<"Quedan "<<wave<< " Waves"<<endl
 		<<"Quedan " << expansive<<" Expansive"<<endl;
-		cin>> seleccion;
+		cin >> seleccion;
+		cout << endl;
 	
 		if(seleccion == 2 && wave ==0 || seleccion ==3 && wave==0 || seleccion ==4 && wave==0){
 			cout<< "No quedan mas ataques del tipo wave."<<endl;
