@@ -15,24 +15,54 @@ void jugador_tablero2(int***, int, &int);
 int main(int argc, char*argv[]){
 	srand(time(NULL));
 	int size = 12;
+	int p1=15,p2=15;
 	int wave1=3,wave2=3, expansive1=3,expansive2=3;
+<<<<<<< HEAD
 	int contador_subs1 = 0;
 	int contador_subs2 = 0;
 
+=======
+	bool terminar_juego=false;
+	int bandera=1;
+>>>>>>> 9a67471b5d0f2670345f290536bd997372591a09
 	int*** matriz = new int**[size];
 	int*** matriz2 = new int**[size];
 
 	crear_llenar(matriz);
-	//imprimir_cubo(matriz,size);
-
 	crear_llenar(matriz2);
-	//imprimir_cubo(matriz2, size);
+	
+	while(!terminar_juego){
+		if(bandera ==1){
+			jugador_tablero1(matriz, size);
+			tipo_ataque(wave1,expansive1);
+			if(p2=0){
+				bandera=3;
+				terminar_juego=true;
+			}else{
+				bandera=2;
+			}	
+		}
+		if(bandera ==2){
+			jugador_tablero2(matriz2, size);
+			tipo_ataque(wave2,expansive2); 		
+			if(p1=0){
+                                bandera=3;
+                                terminar_juego=true;
+                        }else{
+                                bandera=1;
+                        }
 
+<<<<<<< HEAD
 	jugador_tablero1(matriz, size, &contador_subs1);
 	jugador_tablero2(matriz2, size, &contador_subs2);
+=======
+		}
+	}
+>>>>>>> 9a67471b5d0f2670345f290536bd997372591a09
 	
 	return 0;
 }
+
 
 void jugador_tablero1(int*** cubo, int size){
 	cout << "------------------Mapa de submarinos de player 1-------------------" << endl;
@@ -70,8 +100,8 @@ int tipo_ataque(int wave, int expansive){
 	while(seguir){
 		cout<<"Seleccione el tipo de ataque: "<<endl
 		<<"1-Normal"<<endl
-		<<"2-Wave "<<"Quedan"<< wave<<" Por usar."<<endl
-		<<"3-Expansive "<< "Quedan "<< expansive << "Por usar"<<endl;
+		<<"2-Wave "<<"Quedan "<< wave<<" Por usar."<<endl
+		<<"3-Expansive "<< "Quedan "<< expansive << " Por usar"<<endl;
 		cin>> seleccion;
 	
 		if(seleccion == 2 && wave ==0){
