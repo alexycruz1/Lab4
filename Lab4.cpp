@@ -14,8 +14,13 @@ int main(int argc, char*argv[]){
 	int size = 12;
 	
 	int*** matriz = new int**[size];
+	int*** matriz2 = new int**[size];
+
 	crear_llenar(matriz);
-	imprimir_cubo(matriz,size);
+	//imprimir_cubo(matriz,size);
+
+	crear_llenar(matriz2);
+	//imprimir_cubo(matriz2, size);
 	return 0;
 }
 
